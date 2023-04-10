@@ -12,28 +12,34 @@ Note: If the number is a multiple of both 3 and 5, only count it once.
 int solution(int n) {
   Set<int> numbers = {};
 
-  for (var i = 1; i < n; i++) {
-    if (i % 3 == 0) {
-      numbers.add(i);
+  if (n < 0) {
+    return 0;
+  } else {
+    for (var i = 0; i < n; i++) {
+      if (i % 3 == 0) {
+        numbers.add(i);
+      }
     }
-  }
 
-  for (var i = 1; i < n; i++) {
-    if (i % 5 == 0) {
-      numbers.add(i);
+    for (var i = 0; i < n; i++) {
+      if (i % 5 == 0) {
+        numbers.add(i);
+      }
     }
-  }
 
-  return numbers.reduce((value, element) => value + element);
+    return numbers.reduce((value, element) => value + element);
+  }
 }
 
 void tester(int n, int exp) =>
     test("Testing for $n", () => expect(solution(n), equals(exp)));
 void main() {
   group("Basic tests", () {
-    solution(20);
     tester(10, 23);
     tester(20, 78);
     tester(200, 9168);
+    tester(1, 0);
+    tester(2, 0);
+    tester(3, 0);
   });
 }
